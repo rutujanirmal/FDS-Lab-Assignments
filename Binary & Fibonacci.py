@@ -12,35 +12,34 @@ def binary_search(arr, l, r, x):
         print("Roll.No:: ", x, " was absent for training\n")
 
 
-def FibonacciGenerator(n):
-    if n < 1:
-        return 0
-    elif n == 1:
-        return 1
-    else:
-        return FibonacciGenerator(n - 1) + FibonacciGenerator(n - 2)
+def fibonacci(item, x, n):
+    fib2 = 0 
+    fib1 = 1
+    fibn = fib2 + fib1 
+    while (fibn < n):
+        fib2 = fib1
+        fib1 = fibn
+        fibn = fib2 + fib1
+    offset = -1
+    while (fibn > 1):
+        i = min(offset + fib2, n - 1)
 
+        if (item[i] < x):
+            fibn = fib1
+            fib1 = fib2
+            fib2 = fibn - fib1
+            offset = i
+        elif (item[i] > x):
+            fibn = fib2
+            fib1 = fib1 - fib2
+            fib2 = fibn - fib1
+        else:
+            return i
 
-def FibonacciSearch(arr, x):
-    try:
-        m = 0
-        while FibonacciGenerator(m) < len(arr):  #
-            m = m + 1
-        offset = -1
-        while (FibonacciGenerator(m) > 1):
-            i = min(offset + FibonacciGenerator(m - 2), len(arr) - 1)
-            if (x > arr[i]):
-                m = m - 1
-                offset = i
-            elif (x < arr[i]):
-                m = m - 2
-            else:
-                return i
-        if (FibonacciGenerator(m - 1) and arr[offset + 1] == x):
-            return offset + 1
-        return -1
-    except:
-        return -1
+    if (fib1 and item[n - 1] == x):
+        return n - 1;
+
+    return -1
 
 
 arr = []
@@ -62,7 +61,7 @@ while (loop):
     if (a == 1):
         binary_search(arr, 0, n - 1, x)
     elif (a == 2):
-        f = FibonacciSearch(arr, x)
+        f = fibonacci(arr, x, len(arr))
         if (f == -1):
             print("Roll.No:: ", x, " was absent for training\n")
         else:
@@ -72,3 +71,4 @@ while (loop):
         loop = 0
     else:
         print("You entered something wrong")
+
