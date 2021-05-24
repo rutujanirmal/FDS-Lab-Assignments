@@ -2,9 +2,9 @@ def selection_sort(arr, n):
     for i in range(0, n):
         min = i
         for j in range(i + 1, n):
-            if [arr[min] > arr[j]]:
+            if arr[min] > arr[j]:
                 min = j
-            arr[i], arr[min] = arr[min], arr[i]
+        arr[i], arr[min] = arr[min], arr[i]
 
 
 def bubble_sort(arr, n):
@@ -49,4 +49,3 @@ try:
         print(-i, "rank :: ", arr[i])
 except:
     None
-
